@@ -19,33 +19,39 @@ def show_options(options: list) -> None:
 
 
 def visit_menu():
-    text = "Вы находитесь на главной странице библиотеки"
+    text = "Библиотека деревни «Гадюкино»: "
     options = [
         "Показать все кники, которые есть в библиотеке",
         "Добавить книгу в библиотеку",
         "Удалить книгу из библиотеки",
         "Найти книгу по порядковому номеру",
-        "Найти книгу по её данным"
+        "Найти книгу по названию",
+        "Найти книгу по автору",
+        "Найти книгу по году"
     ]
     print(text)
     show_options(options)
     option = input("Введите номер варианта: ")
-    if option == 0:
-        return show_books
-    elif option == 1:
-        return add_book
-    elif option == 2:
-        return remove_book
-    elif option == 3:
-        return search_by_numder
-    elif option == 4:
-        return search_book_by_key
+    if option == "0":
+        return show_books()
+    elif option == "1":
+        return add_book()
+    elif option == "2":
+        return remove_book()
+    elif option == "3":
+        return search_by_numder()
+    elif option == "4":
+        return search_book_by_key('Название')
+    elif option == "5":
+        return search_book_by_key('автор')
+    elif option == "6":
+        return search_book_by_key('год')
     else:
         print("Такой вариант еще не сделан :(")
 
 
 def show_books() -> None:
-    """ выводит на жкран все книги"""
+    """ выводит на экран все книги"""
     if not library:
         print("Библиотека пуста")
         return
@@ -151,7 +157,7 @@ def search_by_numder() -> None:
 
 # по названию
 def search_book_by_key(user_key: str) -> None:
-    """Показывает на экране книгу, если находит её по порядковому номеру"""
+    """Показывает на экране книгу по ключу, если он есть"""
     
     if not library:
         print("Библиотека пуста!")
