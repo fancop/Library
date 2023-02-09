@@ -27,7 +27,8 @@ def visit_menu():
         "Найти книгу по порядковому номеру",
         "Найти книгу по названию",
         "Найти книгу по автору",
-        "Найти книгу по году"
+        "Найти книгу по году", 
+        "Выйти из библиотеки"
     ]
     print(text)
     show_options(options)
@@ -46,6 +47,9 @@ def visit_menu():
         return search_book_by_key('автор')
     elif option == "6":
         return search_book_by_key('год')
+    elif option == "7":
+        print("Приходите к нам ещё! Тут будет ещё больше разных книг!")
+        exit
     else:
         print("Такой вариант еще не сделан :(")
 
