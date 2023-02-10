@@ -18,7 +18,7 @@ def show_options(options: list) -> None:
         print(f"{num}. {option}")
 
 
-def visit_menu():
+def visit_menu() -> None:
     text = "Библиотека деревни «Гадюкино»: "
     options = [
         "Показать все кники, которые есть в библиотеке",
@@ -28,11 +28,11 @@ def visit_menu():
         "Найти книгу по названию",
         "Найти книгу по автору",
         "Найти книгу по году", 
-        "Выйти из библиотеки"
+        "Выйти из библиотеки",
     ]
     print(text)
     show_options(options)
-    option = input("Введите номер варианта: ")
+    option = input("Введите номер варианта и нажмите ENTER: ")
     if option == "0":
         return show_books()
     elif option == "1":
@@ -52,6 +52,7 @@ def visit_menu():
         exit
     else:
         print("Такой вариант еще не сделан :(")
+        return visit_menu()
 
 
 def show_books() -> None:
@@ -66,6 +67,10 @@ def show_books() -> None:
         print("автор", book["автор"])
         print("год", book["год"])
         print("")
+    input("Нажмите ENTER чтобы продолжить")
+    print("")
+    return visit_menu()
+    
 
 
 def add_book():
@@ -102,6 +107,9 @@ def add_book():
 
     library.append(book)
     print(f"Книга {book['название']} добавлена")
+    input("Нажмите ENTER чтобы продолжить")
+    print("")
+    return visit_menu()
 
 
 def remove_book() -> None:
@@ -127,6 +135,9 @@ def remove_book() -> None:
 
     print(f"Книга {library[idx]['название']} удалена")
     library.pop(idx)
+    input("Нажмите ENTER чтобы продолжить")
+    print("")
+    return visit_menu()
 
 
 def search_by_numder() -> None:
@@ -157,6 +168,9 @@ def search_by_numder() -> None:
     print("автор", book["автор"])
     print("год", book["год"])
     print("")
+    input("Нажмите ENTER чтобы продолжить")
+    print("")
+    return visit_menu()
 
 
 # по названию
@@ -186,6 +200,9 @@ def search_book_by_key(user_key: str) -> None:
             print(f"автор: {book['автор']}")
             print(f"год: {book['год']}")
             print("")
+    input("Нажмите ENTER чтобы продолжить")
+    print("")
+    return visit_menu()
 
     
 # тестирование
