@@ -1,3 +1,14 @@
+"""
+Сделать функцию show_book(), она показывает одну книгу
+Доделать выборы в меню
+Если функция поиска ничего не нашла, она должна об этом сказать 
+Очистка экрана
+"""
+
+
+import sys
+
+
 library = [
     {
     "название": "Введение в Python. Том 1",
@@ -18,45 +29,38 @@ def show_options(options: list) -> None:
         print(f"{num}. {option}")
 
 
+def close_library() -> None:
+    """Закрывает программу"""
+    print("Вы вышли из библтотеки! Приходите к нам ещё!")
+    sys.exit()
+
+
 def visit_menu() -> None:
-    text = "Библиотека деревни «Гадюкино»: "
-    options = [
-        "Показать все кники, которые есть в библиотеке",
-        "Добавить книгу в библиотеку",
-        "Удалить книгу из библиотеки",
-        "Найти книгу по порядковому номеру",
-        "Найти книгу по названию",
-        "Найти книгу по автору",
-        "Найти книгу по году", 
-        "Выйти из библиотеки",
-    ]
-    print(text)
-    show_options(options)
-    option = input("Введите номер варианта и нажмите ENTER: ")
-    if option == "0":
-        return show_books()
-    elif option == "1":
-        return add_book()
-    elif option == "2":
-        return remove_book()
-    elif option == "3":
-        return search_by_numder()
-    elif option == "4":
-        return search_book_by_key('Название')
-    elif option == "5":
-        return search_book_by_key('автор')
-    elif option == "6":
-        return search_book_by_key('год')
-    elif option == "7":
-        print("Приходите к нам ещё! Тут будет ещё больше разных книг!")
-        exit
-    else:
-        print("Такой вариант еще не сделан :(")
-        return visit_menu()
+    while True:
+        options = [
+            ("Показать все кники, которые есть в библиотеке", lambda: show_books()),
+            ("Добавить книгу в библиотеку", lambda: add_book()),
+            ("Удалить книгу из библиотеки", lambda: remove_book()),
+            ("Найти книгу по порядковому номеру", lambda: search_by_numder()),
+            ("Найти книгу по названию", lambda: search_book_by_key('название')),
+            ("Найти книгу по автору", lambda: search_book_by_key('автор')),
+            ("Найти книгу по году", lambda: search_book_by_key('год')),
+            ("Выйти из библиотеки", lambda: close_library()),
+        ]
+
+        # 1. Показать все кники, которые есть в библиотеке
+        
+        for i, option in enumerate(options, start=1):
+            print(i, option[0])
+
+        option_num = input("Введите номер варианта и нажмите ENTER: ")
+        idx = int(option_num) - 1
+        options[idx][1]()
+    
 
 
 def show_books() -> None:
-    """ выводит на экран все книги"""
+    """выводит на экран все книги"""
     if not library:
         print("Библиотека пуста")
         return
@@ -70,7 +74,6 @@ def show_books() -> None:
     input("Нажмите ENTER чтобы продолжить")
     print("")
     return visit_menu()
-    
 
 
 def add_book():
